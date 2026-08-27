@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estratégia Inauguração | Anny Ótica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -17,21 +18,44 @@
                         fundo: '#F9FAFB'
                     },
                     fontFamily: {
-                        sans: ['Arial', 'sans-serif'],
+                        sans: ['Quicksand', 'sans-serif'],
                     },
                 }
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .sombra-leve { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-            .texto-sombra { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-            .transicao { transition: all 0.3s ease; }
-        }
-    </style>
+    <script>
+        (function(){
+            var s = document.createElement('style');
+            s.textContent = `
+                .sombra-leve { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+                .texto-sombra { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+                .transicao { transition: all 0.3s ease; }
+                .reveal { opacity: 0; transform: translateY(20px); animation: fadeUp .6s ease forwards; }
+                .reveal:nth-child(2) { animation-delay: .1s; }
+                .reveal:nth-child(3) { animation-delay: .2s; }
+                .reveal:nth-child(4) { animation-delay: .3s; }
+                .reveal:nth-child(5) { animation-delay: .4s; }
+                .reveal:nth-child(6) { animation-delay: .5s; }
+                @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+                .timeline-item::before {
+                    content: '';
+                    position: absolute;
+                    left: -8px;
+                    top: 8px;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: #FF7D00;
+                    border: 3px solid white;
+                    box-shadow: 0 0 0 2px #FF7D00;
+                }
+            `;
+            document.head.appendChild(s);
+        })();
+    </script>
 </head>
-<body class="bg-fundo text-neutro">
+<body class="bg-fundo text-neutro font-sans">
     <!-- Cabeçalho -->
     <header class="bg-primario text-white py-12 md:py-20 relative overflow-hidden">
         <div class="container mx-auto px-4 text-center">
@@ -45,7 +69,7 @@
     <!-- Conteúdo Principal -->
     <main class="container mx-auto px-4 py-12">
         <!-- Seção 1: Parceria com Influenciadores -->
-        <section class="mb-20">
+        <section class="mb-20 reveal">
             <div class="flex items-center gap-3 mb-8">
                 <i class="fa fa-users text-primario text-3xl"></i>
                 <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Parceria com Influenciadores Locais</h2>
@@ -75,15 +99,276 @@
             </div>
         </section>
 
+        <!-- NOVA SEÇÃO: Produção de Vídeos com Dona Anny e Influenciadores -->
+        <section class="mb-20 reveal">
+            <div class="flex items-center gap-3 mb-8">
+                <i class="fa fa-video-camera text-primario text-3xl"></i>
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Produção de Vídeos: Dona Anny + Influenciadores</h2>
+            </div>
+
+            <!-- Parte 1: Vídeos da Dona Anny -->
+            <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">1</div>
+                    <h3 class="text-xl font-semibold text-primario">Vídeos da Dona Anny — A Alma da Marca</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
+                            <i class="fa fa-lightbulb-o text-secundario"></i>
+                            Objetivo
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Criar conexão emocional, apresentar a história da loja, mostrar o cuidado com os clientes e gerar expectativa para a inauguração. A Dona Anny é o rosto da marca — sua autenticidade é o maior diferencial.</p>
+
+                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
+                            <i class="fa fa-list text-secundario"></i>
+                            Roteiros Sugeridos (5 vídeos)
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
+                                <p class="font-medium text-sm">Vídeo 1 — Apresentação</p>
+                                <p class="text-xs text-gray-600 mt-1">"Olá, sou a Anny! Há anos sonhando em trazer cuidado e qualidade para a visão da nossa região. Em breve, a Anny Ótica chega para vocês!"</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
+                                <p class="font-medium text-sm">Vídeo 2 — Bastidores</p>
+                                <p class="text-xs text-gray-600 mt-1">Mostrar a montagem da loja, escolha das armações, organização dos espaços. "Cada detalhe sendo preparado com muito carinho!"</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
+                                <p class="font-medium text-sm">Vídeo 3 — Dicas de Saúde Ocular</p>
+                                <p class="text-xs text-gray-600 mt-1">3 dicas rápidas para cuidar da visão (ex: pausas na tela, alimentação, importância do exame anual). Posiciona como especialista.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
+                                <p class="font-medium text-sm">Vídeo 4 — Convite Oficial</p>
+                                <p class="text-xs text-gray-600 mt-1">Anunciar a data da inauguração, os benefícios do dia e convidar todos: "Quero ver você lá, de pertinho!"</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
+                                <p class="font-medium text-sm">Vídeo 5 — Agradecimento + Expectativa</p>
+                                <p class="text-xs text-gray-600 mt-1">Véspera da inauguração: "Meu coração está cheio de alegria! Amanhã é o dia! Espero vocês!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
+                            <i class="fa fa-camera text-secundario"></i>
+                            Como Gravar (Passo a Passo)
+                        </h4>
+                        <ol class="space-y-3 text-sm">
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">1</span>
+                                <span><strong>Local bem iluminado:</strong> luz natural de frente para o rosto (janela), evite luz de fundo que cria sombra. Se gravar à noite, use uma luminária na frente.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">2</span>
+                                <span><strong>Posição vertical:</strong> celular na vertical (formato Reels/TikTok/Stories), na altura dos olhos. Use um tripé ou apoio para não tremer.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">3</span>
+                                <span><strong>Áudio nítido:</strong> grave em ambiente silencioso, fale próximo ao microfone do celular (15–20cm). Se tiver fone com microfone, use!</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">4</span>
+                                <span><strong>Roupa e cenário:</strong> use roupas de cores neutras ou que combinem com a identidade visual (azul ou laranja). Ao fundo, elementos da ótica ou um fundo limpo e organizado.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">5</span>
+                                <span><strong>Fale naturalmente:</strong> como se estivesse conversando com um amigo. Não decore texto — use pontos-chave. Olhe para a câmera, não para a tela!</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">6</span>
+                                <span><strong>Duração:</strong> cada vídeo entre 30 segundos e 1 minuto e 30 segundos. Curto, direto e pessoal.</span>
+                            </li>
+                        </ol>
+
+                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
+                            <i class="fa fa-magic text-secundario"></i>
+                            Edição Simples
+                        </h4>
+                        <p class="text-sm text-gray-600">Use aplicativos gratuitos como <strong>CapCut</strong> ou <strong>InShot</strong>: adicione legendas automáticas (corrija os erros!), coloque uma música leve de fundo (volume baixo), insira o logo da Anny Ótica no canto e use transições suaves.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parte 2: Vídeos dos Influenciadores -->
+            <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">2</div>
+                    <h3 class="text-xl font-semibold text-primario">Vídeos dos Influenciadores — Alcance Local</h3>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
+                            <i class="fa fa-bullhorn text-secundario"></i>
+                            O Que Pedir aos Influenciadores
+                        </h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">Cada influenciador deve produzir <strong>2 vídeos</strong>: um de <em>expectativa</em> (antes da inauguração) e um de <em>cobertura</em> (no dia da inauguração). Eles falam na sua linguagem, para a sua cidade — isso gera confiança!</p>
+
+                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
+                            <i class="fa fa-file-text-o text-secundario"></i>
+                            Briefing para Enviar (o que eles precisam saber)
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-gray-50 rounded-lg">
+                                <p class="font-medium">Sobre a Anny Ótica:</p>
+                                <p class="text-gray-600 text-xs mt-1">Ótica nova em Pereiro, com foco em atendimento humanizado, qualidade e preços justos. Dona Anny é a proprietária, alguém da região que sonha em cuidar da visão de todos.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg">
+                                <p class="font-medium">Data e local da inauguração:</p>
+                                <p class="text-gray-600 text-xs mt-1">[Definir data] — Rua [endereço], Pereiro-CE. Horário: [ex: 9h às 18h].</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg">
+                                <p class="font-medium">Benefícios do dia:</p>
+                                <p class="text-gray-600 text-xs mt-1">Exame de vista gratuito, descontos especiais, 10% extra para quem vem de cidades vizinhas, sorteios.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg">
+                                <p class="font-medium">Obrigatoriedades no vídeo:</p>
+                                <ul class="text-gray-600 text-xs mt-1 space-y-1">
+                                    <li>• Mencionar o nome "Anny Ótica" pelo menos 2 vezes</li>
+                                    <li>• Marcar o perfil @annyotica (quando criado)</li>
+                                    <li>• Usar a hashtag #AnnyOticaChegou</li>
+                                    <li>• Colocar localização da loja ou cidade</li>
+                                    <li>• Chamar para a inauguração com data e horário</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg">
+                                <p class="font-medium">Brinde que receberão:</p>
+                                <p class="text-gray-600 text-xs mt-1">Armação + óculos personalizado, estojo, lenço, convite VIP e cupom exclusivo para usar no dia.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
+                            <i class="fa fa-lightbulb-o text-secundario"></i>
+                            Ideias de Conteúdo para Eles
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="p-3 border-l-4 border-primario bg-blue-50 rounded-r-lg">
+                                <p class="font-medium text-sm">Vídeo 1 — Expectativa (antes da inauguração)</p>
+                                <p class="text-xs text-gray-600 mt-1">"Pessoal, recebi um convite especial! A Anny Ótica está chegando em Pereiro e eu fui convidada para a inauguração. Vou ganhar um óculos personalizado e vocês também podem aproveitar benefícios incríveis no dia! Marquem na agenda: [data]!"</p>
+                                <p class="text-xs text-gray-500 mt-2">Dica: eles podem gravar recebendo o brinde em casa, mostrando o estojo e o convite.</p>
+                            </div>
+                            <div class="p-3 border-l-4 border-primario bg-blue-50 rounded-r-lg">
+                                <p class="font-medium text-sm">Vídeo 2 — Cobertura (dia da inauguração)</p>
+                                <p class="text-xs text-gray-600 mt-1">"HOJE É O DIA! Estou aqui na inauguração da Anny Ótica, a loja está linda, a Dona Anny nos recebeu super bem! Tem exame de vista gratuito, descontos e muita gente bonita. Vem também, ainda dá tempo!"</p>
+                                <p class="text-xs text-gray-500 mt-2">Dica: mostrar a fachada, o movimento, os produtos, interagir com a Dona Anny, mostrar seu óculos novo.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
+                            <i class="fa fa-check-circle text-secundario"></i>
+                            Regras para Garantir Qualidade
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Pedir para gravarem na vertical, com boa luz e áudio claro</li>
+                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Solicitar envio do vídeo para aprovação <strong>antes</strong> da publicação</li>
+                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Combinar horário de postagem para todos postarem em dias estratégicos</li>
+                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> No dia da inauguração, pedir para fazerem <strong>stories ao vivo</strong> ou sequência de stories</li>
+                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Repostar os vídeos deles no perfil da Anny Ótica (com créditos)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parte 3: Cronograma até o Go-Live -->
+            <div class="bg-white p-6 rounded-xl sombra-leve">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">3</div>
+                    <h3 class="text-xl font-semibold text-primario">Cronograma de Produção até o Go-Live</h3>
+                </div>
+
+                <div class="relative pl-8 border-l-2 border-secundario space-y-6">
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">30 dias antes — Planejamento</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Definir perfil do Instagram/Facebook da Anny Ótica</li>
+                            <li>• Criar logo e identidade visual básica</li>
+                            <li>• Listar influenciadores por cidade e contatá-los</li>
+                            <li>• Rascunhar os 5 roteiros da Dona Anny</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">20 dias antes — Gravações Iniciais</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Gravar Vídeos 1 e 2 da Dona Anny (apresentação + bastidores)</li>
+                            <li>• Editar e agendar postagem desses vídeos</li>
+                            <li>• Fechar parceria com influenciadores e enviar briefing</li>
+                            <li>• Preparar e enviar os brindes para cada influenciador</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">15 dias antes — Conteúdo de Expectativa</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Publicar Vídeo 1 da Dona Anny (apresentação)</li>
+                            <li>• Gravar Vídeo 3 da Dona Anny (dicas de saúde ocular)</li>
+                            <li>• Influenciadores gravam e enviam para aprovação seu Vídeo 1 (expectativa)</li>
+                            <li>• Influenciadores publicam seus vídeos de expectativa</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">10 dias antes — Aquecimento</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Publicar Vídeo 2 da Dona Anny (bastidores)</li>
+                            <li>• Publicar Vídeo 3 da Dona Anny (dicas)</li>
+                            <li>• Repostar os melhores vídeos dos influenciadores</li>
+                            <li>• Criar artes de carrossel com depoimentos/dicas</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">7 dias antes — Convite Oficial</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Gravar e publicar Vídeo 4 da Dona Anny (convite oficial com data)</li>
+                            <li>• Influenciadores reforçam o convite em stories</li>
+                            <li>• Iniciar contagem regressiva nos stories da marca</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">1 dia antes — Véspera</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Publicar Vídeo 5 da Dona Anny (agradecimento + expectativa)</li>
+                            <li>• Influenciadores postam stories lembrando da inauguração amanhã</li>
+                            <li>• Confirmar presença dos influenciadores no dia D</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">Dia D — Go-Live!</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Dona Anny faz stories ao vivo durante a manhã</li>
+                            <li>• Influenciadores gravam Vídeo 2 (cobertura) e publicam ao longo do dia</li>
+                            <li>• Influenciadores fazem stories ao vivo mostrando o movimento</li>
+                            <li>• Repostar tudo no perfil da marca, agradecendo cada participante</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item relative">
+                        <p class="font-semibold text-neutro">1 dia depois — Pós-inauguração</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Vídeo de agradecimento da Dona Anny com fotos/vídeos do dia</li>
+                            <li>• Montar um reel com os melhores momentos de todos os vídeos</li>
+                            <li>• Continuar repostando conteúdos que ainda estão surgindo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Seção 2: Cerimônia do Dia -->
-        <section class="mb-20">
+        <section class="mb-20 reveal">
             <div class="flex items-center gap-3 mb-8">
                 <i class="fa fa-bullhorn text-primario text-3xl"></i>
                 <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Cerimônia e Decoração</h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
-                <h3 class="text-xl font-semibold mb-4 text-primario">Momento Destaque: Balões e Confete 🎈</h3>
+                <h3 class="text-xl font-semibold mb-4 text-primario">Momento Destaque: Balões e Confete</h3>
                 <p class="mb-4">No momento do corte da fita, todos soltam balões e confete simultaneamente — cria um momento bonito, fotogênico e que viraliza fácil!</p>
                 <ul class="space-y-2 pl-6">
                     <li class="flex items-center gap-2"><i class="fa fa-star text-secundario"></i> Decoração econômica: arco de balões, faixa com nome da loja</li>
@@ -94,7 +379,7 @@
         </section>
 
         <!-- Seção 3: Marketing e Design -->
-        <section class="mb-20">
+        <section class="mb-20 reveal">
             <div class="flex items-center gap-3 mb-8">
                 <i class="fa fa-paint-brush text-primario text-3xl"></i>
                 <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Marketing e Identidade Visual</h2>
@@ -123,11 +408,11 @@
             </div>
         </section>
 
-        <!-- Seção 4: Cronograma -->
-        <section class="mb-12">
+        <!-- Seção 4: Cronograma Geral -->
+        <section class="mb-12 reveal">
             <div class="flex items-center gap-3 mb-8">
                 <i class="fa fa-calendar text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Cronograma Passo a Passo</h2>
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Cronograma Geral Passo a Passo</h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl sombra-leve overflow-x-auto">
@@ -174,7 +459,7 @@
         <div class="container mx-auto px-4">
             <h3 class="text-xl font-semibold mb-2">Anny Ótica</h3>
             <p>Chegando para cuidar da sua visão com carinho e qualidade!</p>
-            <p class="mt-4 text-sm opacity-80">Estratégia desenvolvida para fazer mais com menos ✨</p>
+            <p class="mt-4 text-sm opacity-80">Estratégia desenvolvida para fazer mais com menos</p>
         </div>
     </footer>
 
