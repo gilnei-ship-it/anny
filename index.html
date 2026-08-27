@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Estratégia Inauguração | Anny Ótica</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +20,37 @@
                     fontFamily: {
                         sans: ['Quicksand', 'sans-serif'],
                     },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                        'zoom-in': 'zoomIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
                 }
             }
         }
@@ -29,15 +60,20 @@
             var s = document.createElement('style');
             s.textContent = `
                 .sombra-leve { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+                .sombra-hover { transition: all 0.3s ease; }
+                .sombra-hover:hover { box-shadow: 0 12px 30px rgba(22,93,255,0.15); transform: translateY(-4px); }
                 .texto-sombra { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
                 .transicao { transition: all 0.3s ease; }
+                
                 .reveal { opacity: 0; transform: translateY(20px); animation: fadeUp .6s ease forwards; }
                 .reveal:nth-child(2) { animation-delay: .1s; }
                 .reveal:nth-child(3) { animation-delay: .2s; }
                 .reveal:nth-child(4) { animation-delay: .3s; }
                 .reveal:nth-child(5) { animation-delay: .4s; }
                 .reveal:nth-child(6) { animation-delay: .5s; }
+                
                 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+                
                 .timeline-item::before {
                     content: '';
                     position: absolute;
@@ -49,192 +85,370 @@
                     background: #FF7D00;
                     border: 3px solid white;
                     box-shadow: 0 0 0 2px #FF7D00;
+                    transition: all 0.3s ease;
+                }
+                .timeline-item:hover::before {
+                    transform: scale(1.3);
+                    box-shadow: 0 0 0 4px rgba(255,125,0,0.3);
+                }
+                
+                .icon-bounce { transition: transform 0.3s ease; }
+                .icon-bounce:hover { animation: bounce 0.6s ease; }
+                
+                .card-rotate { transition: all 0.4s ease; }
+                .card-rotate:hover { transform: perspective(1000px) rotateY(2deg) rotateX(2deg); }
+                
+                .gradient-text {
+                    background: linear-gradient(135deg, #165DFF, #FF7D00);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+                
+                .bg-pattern {
+                    background-image: radial-gradient(circle at 20% 50%, rgba(22,93,255,0.05) 0%, transparent 50%),
+                                      radial-gradient(circle at 80% 20%, rgba(255,125,0,0.05) 0%, transparent 50%);
+                }
+                
+                .list-item-icon {
+                    transition: all 0.3s ease;
+                }
+                .list-item:hover .list-item-icon {
+                    transform: scale(1.2) rotate(10deg);
+                }
+                
+                .number-badge {
+                    transition: all 0.3s ease;
+                }
+                .number-badge:hover {
+                    transform: scale(1.1) rotate(5deg);
+                }
+                
+                @keyframes pulse-ring {
+                    0% { box-shadow: 0 0 0 0 rgba(255,125,0,0.4); }
+                    70% { box-shadow: 0 0 0 10px rgba(255,125,0,0); }
+                    100% { box-shadow: 0 0 0 0 rgba(255,125,0,0); }
+                }
+                .pulse-ring { animation: pulse-ring 2s infinite; }
+                
+                .scroll-indicator {
+                    animation: bounce 2s infinite;
                 }
             `;
             document.head.appendChild(s);
         })();
     </script>
 </head>
-<body class="bg-fundo text-neutro font-sans">
+<body class="bg-fundo text-neutro font-sans bg-pattern">
     <!-- Cabeçalho -->
-    <header class="bg-primario text-white py-12 md:py-20 relative overflow-hidden">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-3 texto-sombra">Anny Ótica</h1>
-            <h2 class="text-[clamp(1.2rem,3vw,2rem)] font-medium mb-6">Estratégia de Inauguração</h2>
-            <p class="text-[clamp(1rem,2vw,1.2rem)] max-w-2xl mx-auto">Foco em fazer mais com menos, alcançando todas as cidades vizinhas e criando uma inauguração memorável!</p>
+    <header class="bg-primario text-white py-10 md:py-20 relative overflow-hidden">
+        <!-- Elementos decorativos animados -->
+        <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-white/10 animate-float"></div>
+        <div class="absolute top-20 right-16 w-12 h-12 rounded-full bg-white/10 animate-float" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-20 left-1/4 w-8 h-8 rounded-full bg-white/10 animate-float" style="animation-delay: 1s;"></div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="flex justify-center mb-4">
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center sombra-leve animate-bounce-slow">
+                    <i class="fa fa-eye text-primario text-3xl md:text-4xl"></i>
+                </div>
+            </div>
+            <h1 class="text-[clamp(1.8rem,6vw,3.5rem)] font-bold mb-3 texto-sombra">Anny Ótica</h1>
+            <h2 class="text-[clamp(1rem,4vw,2rem)] font-medium mb-4 md:mb-6">Estratégia de Inauguração</h2>
+            <p class="text-[clamp(0.9rem,3vw,1.2rem)] max-w-2xl mx-auto px-2">Foco em fazer mais com menos, alcançando todas as cidades vizinhas e criando uma inauguração memorável!</p>
+            
+            <div class="mt-6 scroll-indicator">
+                <i class="fa fa-chevron-down text-white/70 text-xl"></i>
+            </div>
         </div>
-        <div class="absolute -bottom-1 left-0 w-full h-8 bg-fundo rounded-t-3xl"></div>
+        <div class="absolute -bottom-1 left-0 w-full h-6 md:h-8 bg-fundo rounded-t-3xl"></div>
     </header>
 
     <!-- Conteúdo Principal -->
-    <main class="container mx-auto px-4 py-12">
+    <main class="container mx-auto px-3 md:px-4 py-8 md:py-12">
         <!-- Seção 1: Parceria com Influenciadores -->
-        <section class="mb-20 reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa fa-users text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Parceria com Influenciadores Locais</h2>
+        <section class="mb-16 md:mb-20 reveal">
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primario/10 flex items-center justify-center icon-bounce">
+                    <i class="fa fa-users text-primario text-2xl md:text-3xl"></i>
+                </div>
+                <h2 class="text-[clamp(1.3rem,4vw,2rem)] font-bold">Parceria com Influenciadores Locais</h2>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl sombra-leve transicao hover:scale-[1.02]">
-                    <h3 class="text-xl font-semibold mb-4 text-primario">Cidades Atendidas</h3>
-                    <ul class="space-y-2 pl-6">
-                        <li class="flex items-center gap-2"><i class="fa fa-check text-secundario"></i> Pereiro - CE</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check text-secundario"></i> São Miguel - RN</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check text-secundario"></i> Coronel João Pessoa - RN</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check text-secundario"></i> Dr Severiano - RN</li>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa fa-map-marker text-secundario text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Cidades Atendidas</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-map-pin text-secundario text-sm"></i>
+                            </div>
+                            <span class="font-medium">Pereiro - CE</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-map-pin text-secundario text-sm"></i>
+                            </div>
+                            <span class="font-medium">São Miguel - RN</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-map-pin text-secundario text-sm"></i>
+                            </div>
+                            <span class="font-medium">Coronel João Pessoa - RN</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-map-pin text-secundario text-sm"></i>
+                            </div>
+                            <span class="font-medium">Dr Severiano - RN</span>
+                        </li>
                     </ul>
-                    <p class="mt-4 text-gray-600">Regra: <strong>1 influenciador por cidade</strong> — nano/microinfluenciadores com 1.000 a 15.000 seguidores locais, maior confiança e custo baixo!</p>
+                    <div class="mt-5 p-3 bg-primario/5 rounded-lg border-l-4 border-primario">
+                        <p class="text-sm text-gray-700 flex items-start gap-2">
+                            <i class="fa fa-info-circle text-primario mt-1 flex-shrink-0"></i>
+                            <span><strong>Regra:</strong> 1 influenciador por cidade — nano/microinfluenciadores com 1.000 a 15.000 seguidores locais, maior confiança e custo baixo!</span>
+                        </p>
+                    </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl sombra-leve transicao hover:scale-[1.02]">
-                    <h3 class="text-xl font-semibold mb-4 text-primario">Brinde Personalizado</h3>
-                    <ul class="space-y-2 pl-6">
-                        <li class="flex items-center gap-2"><i class="fa fa-gift text-secundario"></i> Armação + óculos (grau ou sol)</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-gift text-secundario"></i> Estojo personalizado Anny Ótica</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-gift text-secundario"></i> Lenço de limpeza e cartão de agradecimento</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-gift text-secundario"></i> Convite oficial + cupom exclusivo</li>
+                <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa fa-gift text-secundario text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Brinde Personalizado</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-diamond text-secundario text-sm"></i>
+                            </div>
+                            <span>Armação + óculos (grau ou sol)</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-briefcase text-secundario text-sm"></i>
+                            </div>
+                            <span>Estojo personalizado Anny Ótica</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-hand-spock-o text-secundario text-sm"></i>
+                            </div>
+                            <span>Lenço de limpeza e cartão de agradecimento</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-ticket text-secundario text-sm"></i>
+                            </div>
+                            <span>Convite oficial + cupom exclusivo</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- NOVA SEÇÃO: Produção de Vídeos com Anny e Influenciadores -->
-        <section class="mb-20 reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa fa-video-camera text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Produção de Vídeos: Anny + Influenciadores</h2>
+        <!-- SEÇÃO DE VÍDEOS -->
+        <section class="mb-16 md:mb-20 reveal">
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primario/10 flex items-center justify-center icon-bounce">
+                    <i class="fa fa-video-camera text-primario text-2xl md:text-3xl"></i>
+                </div>
+                <h2 class="text-[clamp(1.3rem,4vw,2rem)] font-bold">Produção de Vídeos</h2>
             </div>
 
             <!-- Parte 1: Vídeos da Anny -->
-            <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
+            <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover mb-6 md:mb-8">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">1</div>
-                    <h3 class="text-xl font-semibold text-primario">Vídeos da Anny — A Alma da Marca</h3>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primario flex items-center justify-center text-white font-bold number-badge pulse-ring">1</div>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Vídeos da Anny</h3>
+                        <p class="text-xs md:text-sm text-gray-500 flex items-center gap-1">
+                            <i class="fa fa-heart text-secundario"></i>
+                            A Alma da Marca
+                        </p>
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid md:grid-cols-2 gap-5 md:gap-6">
                     <div class="space-y-4">
-                        <h4 class="font-semibold text-neutro flex items-center gap-2">
-                            <i class="fa fa-lightbulb-o text-secundario"></i>
-                            Objetivo
-                        </h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">Criar conexão emocional, apresentar a história da loja, mostrar o cuidado com os clientes e gerar expectativa para a inauguração. A Anny é o rosto da marca — sua autenticidade é o maior diferencial.</p>
+                        <div class="p-4 bg-gradient-to-r from-primario/5 to-transparent rounded-lg">
+                            <h4 class="font-semibold text-neutro flex items-center gap-2 mb-2">
+                                <i class="fa fa-lightbulb-o text-secundario"></i>
+                                Objetivo
+                            </h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Criar conexão emocional, apresentar a história da loja, mostrar o cuidado com os clientes e gerar expectativa. A autenticidade da Anny é o maior diferencial!</p>
+                        </div>
 
-                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
-                            <i class="fa fa-list text-secundario"></i>
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
+                            <i class="fa fa-list-ol text-secundario"></i>
                             Roteiros Sugeridos (5 vídeos)
                         </h4>
                         <div class="space-y-3">
-                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
-                                <p class="font-medium text-sm">Vídeo 1 — Apresentação</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario transicao hover:bg-secundario/5">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-hand-paper-o text-secundario"></i>
+                                    Vídeo 1 — Apresentação
+                                </p>
                                 <p class="text-xs text-gray-600 mt-1">"Olá, sou a Anny! Há anos sonhando em trazer cuidado e qualidade para a visão da nossa região. Em breve, a Anny Ótica chega para vocês!"</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
-                                <p class="font-medium text-sm">Vídeo 2 — Bastidores</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario transicao hover:bg-secundario/5">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-cogs text-secundario"></i>
+                                    Vídeo 2 — Bastidores
+                                </p>
                                 <p class="text-xs text-gray-600 mt-1">Mostrar a montagem da loja, escolha das armações, organização dos espaços. "Cada detalhe sendo preparado com muito carinho!"</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
-                                <p class="font-medium text-sm">Vídeo 3 — Dicas de Saúde Ocular</p>
-                                <p class="text-xs text-gray-600 mt-1">3 dicas rápidas para cuidar da visão (ex: pausas na tela, alimentação, importância do exame anual). Posiciona como especialista.</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario transicao hover:bg-secundario/5">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-heartbeat text-secundario"></i>
+                                    Vídeo 3 — Dicas de Saúde Ocular
+                                </p>
+                                <p class="text-xs text-gray-600 mt-1">3 dicas rápidas para cuidar da visão (pausas na tela, alimentação, exame anual). Posiciona como especialista!</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
-                                <p class="font-medium text-sm">Vídeo 4 — Convite Oficial</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario transicao hover:bg-secundario/5">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-calendar-check-o text-secundario"></i>
+                                    Vídeo 4 — Convite Oficial
+                                </p>
                                 <p class="text-xs text-gray-600 mt-1">Anunciar a data da inauguração, os benefícios do dia e convidar todos: "Quero ver você lá, de pertinho!"</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario">
-                                <p class="font-medium text-sm">Vídeo 5 — Agradecimento + Expectativa</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-secundario transicao hover:bg-secundario/5">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-star text-secundario"></i>
+                                    Vídeo 5 — Agradecimento
+                                </p>
                                 <p class="text-xs text-gray-600 mt-1">Véspera da inauguração: "Meu coração está cheio de alegria! Amanhã é o dia! Espero vocês!"</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="space-y-4">
-                        <h4 class="font-semibold text-neutro flex items-center gap-2">
-                            <i class="fa fa-camera text-secundario"></i>
-                            Como Gravar (Passo a Passo)
-                        </h4>
+                        <div class="p-4 bg-gradient-to-r from-secundario/5 to-transparent rounded-lg">
+                            <h4 class="font-semibold text-neutro flex items-center gap-2 mb-2">
+                                <i class="fa fa-video-camera text-secundario"></i>
+                                Como Gravar (Passo a Passo)
+                            </h4>
+                        </div>
                         <ol class="space-y-3 text-sm">
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">1</span>
-                                <span><strong>Local bem iluminado:</strong> luz natural de frente para o rosto (janela), evite luz de fundo que cria sombra. Se gravar à noite, use uma luminária na frente.</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">1</span>
+                                <div>
+                                    <strong>Local bem iluminado</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Luz natural de frente para o rosto (janela). Evite luz de fundo que cria sombra!</p>
+                                </div>
                             </li>
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">2</span>
-                                <span><strong>Posição vertical:</strong> celular na vertical (formato Reels/TikTok/Stories), na altura dos olhos. Use um tripé ou apoio para não tremer.</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">2</span>
+                                <div>
+                                    <strong>Posição vertical</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Celular na vertical (formato Reels), na altura dos olhos. Use tripé ou apoio!</p>
+                                </div>
                             </li>
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">3</span>
-                                <span><strong>Áudio nítido:</strong> grave em ambiente silencioso, fale próximo ao microfone do celular (15–20cm). Se tiver fone com microfone, use!</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">3</span>
+                                <div>
+                                    <strong>Áudio nítido</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Ambiente silencioso, fale próximo ao microfone (15–20cm). Use fone com mic se tiver!</p>
+                                </div>
                             </li>
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">4</span>
-                                <span><strong>Roupa e cenário:</strong> use roupas de cores neutras ou que combinem com a identidade visual (azul ou laranja). Ao fundo, elementos da ótica ou um fundo limpo e organizado.</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">4</span>
+                                <div>
+                                    <strong>Roupa e cenário</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Cores neutras ou azul/laranja. Ao fundo, elementos da ótica ou ambiente limpo!</p>
+                                </div>
                             </li>
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">5</span>
-                                <span><strong>Fale naturalmente:</strong> como se estivesse conversando com um amigo. Não decore texto — use pontos-chave. Olhe para a câmera, não para a tela!</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">5</span>
+                                <div>
+                                    <strong>Fale naturalmente</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Como se conversasse com um amigo. Olhe para a câmera, não para a tela!</p>
+                                </div>
                             </li>
-                            <li class="flex gap-3">
-                                <span class="w-6 h-6 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">6</span>
-                                <span><strong>Duração:</strong> cada vídeo entre 30 segundos e 1 minuto e 30 segundos. Curto, direto e pessoal.</span>
+                            <li class="flex gap-3 items-start p-2 rounded-lg transicao hover:bg-gray-50">
+                                <span class="w-7 h-7 rounded-full bg-secundario text-white flex items-center justify-center flex-shrink-0 text-xs font-bold number-badge">6</span>
+                                <div>
+                                    <strong>Duração ideal</strong>
+                                    <p class="text-xs text-gray-600 mt-1">Cada vídeo entre 30 segundos e 1 minuto e 30 segundos. Curto e direto!</p>
+                                </div>
                             </li>
                         </ol>
 
-                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
-                            <i class="fa fa-magic text-secundario"></i>
-                            Edição Simples
-                        </h4>
-                        <p class="text-sm text-gray-600">Use aplicativos gratuitos como <strong>CapCut</strong> ou <strong>InShot</strong>: adicione legendas automáticas (corrija os erros!), coloque uma música leve de fundo (volume baixo), insira o logo da Anny Ótica no canto e use transições suaves.</p>
+                        <div class="p-4 bg-primario/5 rounded-lg border border-primario/20 mt-4">
+                            <h4 class="font-semibold text-neutro flex items-center gap-2 mb-2">
+                                <i class="fa fa-magic text-primario"></i>
+                                Edição Simples
+                            </h4>
+                            <p class="text-sm text-gray-600">Use apps gratuitos como <strong>CapCut</strong> ou <strong>InShot</strong>: legendas automáticas, música leve de fundo, logo da Anny Ótica e transições suaves!</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Parte 2: Vídeos dos Influenciadores -->
-            <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
+            <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover mb-6 md:mb-8">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">2</div>
-                    <h3 class="text-xl font-semibold text-primario">Vídeos dos Influenciadores — Alcance Local</h3>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primario flex items-center justify-center text-white font-bold number-badge pulse-ring">2</div>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Vídeos dos Influenciadores</h3>
+                        <p class="text-xs md:text-sm text-gray-500 flex items-center gap-1">
+                            <i class="fa fa-bullhorn text-secundario"></i>
+                            Alcance Local Garantido
+                        </p>
+                    </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6">
+                <div class="grid md:grid-cols-2 gap-5 md:gap-6">
                     <div class="space-y-4">
-                        <h4 class="font-semibold text-neutro flex items-center gap-2">
-                            <i class="fa fa-bullhorn text-secundario"></i>
-                            O Que Pedir aos Influenciadores
-                        </h4>
-                        <p class="text-gray-600 text-sm leading-relaxed">Cada influenciador deve produzir <strong>2 vídeos</strong>: um de <em>expectativa</em> (antes da inauguração) e um de <em>cobertura</em> (no dia da inauguração). Eles falam na sua linguagem, para a sua cidade — isso gera confiança!</p>
+                        <div class="p-4 bg-gradient-to-r from-primario/5 to-transparent rounded-lg">
+                            <h4 class="font-semibold text-neutro flex items-center gap-2 mb-2">
+                                <i class="fa fa-bullhorn text-secundario"></i>
+                                O Que Pedir aos Influenciadores
+                            </h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Cada influenciador produz <strong>2 vídeos</strong>: um de <em>expectativa</em> (antes) e um de <em>cobertura</em> (no dia). Eles falam na linguagem da cidade!</p>
+                        </div>
 
-                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
+                        <h4 class="font-semibold text-neutro flex items-center gap-2">
                             <i class="fa fa-file-text-o text-secundario"></i>
-                            Briefing para Enviar (o que eles precisam saber)
+                            Briefing para Enviar
                         </h4>
                         <div class="space-y-3 text-sm">
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <p class="font-medium">Sobre a Anny Ótica:</p>
-                                <p class="text-gray-600 text-xs mt-1">Ótica nova em Pereiro, com foco em atendimento humanizado, qualidade e preços justos. Anny é a proprietária, alguém da região que sonha em cuidar da visão de todos.</p>
+                            <div class="p-3 bg-gray-50 rounded-lg transicao hover:bg-primario/5">
+                                <p class="font-medium flex items-center gap-2">
+                                    <i class="fa fa-info-circle text-primario text-xs"></i>
+                                    Sobre a Anny Ótica
+                                </p>
+                                <p class="text-gray-600 text-xs mt-1">Ótica nova em Pereiro, atendimento humanizado, qualidade e preços justos. Anny é da região!</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <p class="font-medium">Data e local da inauguração:</p>
+                            <div class="p-3 bg-gray-50 rounded-lg transicao hover:bg-primario/5">
+                                <p class="font-medium flex items-center gap-2">
+                                    <i class="fa fa-map-marker text-primario text-xs"></i>
+                                    Data e Local
+                                </p>
                                 <p class="text-gray-600 text-xs mt-1">[Definir data] — Rua [endereço], Pereiro-CE. Horário: [ex: 9h às 18h].</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <p class="font-medium">Benefícios do dia:</p>
-                                <p class="text-gray-600 text-xs mt-1">Exame de vista gratuito, descontos especiais, 10% extra para quem vem de cidades vizinhas, sorteios.</p>
+                            <div class="p-3 bg-gray-50 rounded-lg transicao hover:bg-primario/5">
+                                <p class="font-medium flex items-center gap-2">
+                                    <i class="fa fa-tag text-primario text-xs"></i>
+                                    Benefícios do Dia
+                                </p>
+                                <p class="text-gray-600 text-xs mt-1">Exame de vista gratuito, descontos especiais, 10% extra para cidades vizinhas, sorteios.</p>
                             </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <p class="font-medium">Obrigatoriedades no vídeo:</p>
+                            <div class="p-3 bg-gray-50 rounded-lg transicao hover:bg-primario/5">
+                                <p class="font-medium flex items-center gap-2">
+                                    <i class="fa fa-check-square-o text-primario text-xs"></i>
+                                    Obrigatoriedades
+                                </p>
                                 <ul class="text-gray-600 text-xs mt-1 space-y-1">
-                                    <li>• Mencionar o nome "Anny Ótica" pelo menos 2 vezes</li>
-                                    <li>• Marcar o perfil @annyotica (quando criado)</li>
-                                    <li>• Usar a hashtag #AnnyOticaChegou</li>
-                                    <li>• Colocar localização da loja ou cidade</li>
-                                    <li>• Chamar para a inauguração com data e horário</li>
+                                    <li class="flex items-center gap-1"><i class="fa fa-angle-right text-secundario"></i> Mencionar "Anny Ótica" pelo menos 2x</li>
+                                    <li class="flex items-center gap-1"><i class="fa fa-angle-right text-secundario"></i> Marcar @annyotica</li>
+                                    <li class="flex items-center gap-1"><i class="fa fa-angle-right text-secundario"></i> Hashtag #AnnyOticaChegou</li>
+                                    <li class="flex items-center gap-1"><i class="fa fa-angle-right text-secundario"></i> Localização da loja</li>
+                                    <li class="flex items-center gap-1"><i class="fa fa-angle-right text-secundario"></i> Chamada com data e horário</li>
                                 </ul>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <p class="font-medium">Brinde que receberão:</p>
-                                <p class="text-gray-600 text-xs mt-1">Armação + óculos personalizado, estojo, lenço, convite VIP e cupom exclusivo para usar no dia.</p>
                             </div>
                         </div>
                     </div>
@@ -242,118 +456,176 @@
                     <div class="space-y-4">
                         <h4 class="font-semibold text-neutro flex items-center gap-2">
                             <i class="fa fa-lightbulb-o text-secundario"></i>
-                            Ideias de Conteúdo para Eles
+                            Ideias de Conteúdo
                         </h4>
                         <div class="space-y-3">
-                            <div class="p-3 border-l-4 border-primario bg-blue-50 rounded-r-lg">
-                                <p class="font-medium text-sm">Vídeo 1 — Expectativa (antes da inauguração)</p>
-                                <p class="text-xs text-gray-600 mt-1">"Pessoal, recebi um convite especial! A Anny Ótica está chegando em Pereiro e eu fui convidada para a inauguração. Vou ganhar um óculos personalizado e vocês também podem aproveitar benefícios incríveis no dia! Marquem na agenda: [data]!"</p>
-                                <p class="text-xs text-gray-500 mt-2">Dica: eles podem gravar recebendo o brinde em casa, mostrando o estojo e o convite.</p>
+                            <div class="p-4 border-l-4 border-primario bg-blue-50 rounded-r-lg card-rotate">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-clock-o text-primario"></i>
+                                    Vídeo 1 — Expectativa
+                                </p>
+                                <p class="text-xs text-gray-600 mt-2">"Pessoal, recebi um convite especial! A Anny Ótica está chegando e eu fui convidada para a inauguração. Vou ganhar um óculos personalizado e vocês também aproveitam benefícios incríveis! Marquem na agenda: [data]!"</p>
+                                <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                                    <i class="fa fa-lightbulb-o text-secundario"></i>
+                                    Dica: gravar recebendo o brinde em casa!
+                                </p>
                             </div>
-                            <div class="p-3 border-l-4 border-primario bg-blue-50 rounded-r-lg">
-                                <p class="font-medium text-sm">Vídeo 2 — Cobertura (dia da inauguração)</p>
-                                <p class="text-xs text-gray-600 mt-1">"HOJE É O DIA! Estou aqui na inauguração da Anny Ótica, a loja está linda, a Anny nos recebeu super bem! Tem exame de vista gratuito, descontos e muita gente bonita. Vem também, ainda dá tempo!"</p>
-                                <p class="text-xs text-gray-500 mt-2">Dica: mostrar a fachada, o movimento, os produtos, interagir com a Anny, mostrar seu óculos novo.</p>
+                            <div class="p-4 border-l-4 border-primario bg-blue-50 rounded-r-lg card-rotate">
+                                <p class="font-medium text-sm flex items-center gap-2">
+                                    <i class="fa fa-calendar text-primario"></i>
+                                    Vídeo 2 — Cobertura no Dia
+                                </p>
+                                <p class="text-xs text-gray-600 mt-2">"HOJE É O DIA! Estou aqui na inauguração da Anny Ótica, a loja está linda, a Anny nos recebeu super bem! Tem exame gratuito, descontos e muita gente bonita. Vem também!"</p>
+                                <p class="text-xs text-gray-500 mt-2 flex items-center gap-1">
+                                    <i class="fa fa-lightbulb-o text-secundario"></i>
+                                    Dica: mostrar fachada, movimento, produtos e seu óculos novo!
+                                </p>
                             </div>
                         </div>
 
-                        <h4 class="font-semibold text-neutro flex items-center gap-2 mt-6">
-                            <i class="fa fa-check-circle text-secundario"></i>
-                            Regras para Garantir Qualidade
-                        </h4>
-                        <ul class="space-y-2 text-sm text-gray-600">
-                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Pedir para gravarem na vertical, com boa luz e áudio claro</li>
-                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Solicitar envio do vídeo para aprovação <strong>antes</strong> da publicação</li>
-                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Combinar horário de postagem para todos postarem em dias estratégicos</li>
-                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> No dia da inauguração, pedir para fazerem <strong>stories ao vivo</strong> ou sequência de stories</li>
-                            <li class="flex gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Repostar os vídeos deles no perfil da Anny Ótica (com créditos)</li>
-                        </ul>
+                        <div class="p-4 bg-secundario/5 rounded-lg border border-secundario/20 mt-4">
+                            <h4 class="font-semibold text-neutro flex items-center gap-2 mb-3">
+                                <i class="fa fa-check-circle text-secundario"></i>
+                                Regras de Qualidade
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex gap-2 items-start">
+                                    <i class="fa fa-check text-secundario mt-1 flex-shrink-0"></i>
+                                    <span>Gravação na vertical, boa luz e áudio claro</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <i class="fa fa-check text-secundario mt-1 flex-shrink-0"></i>
+                                    <span>Vídeo enviado para <strong>aprovação antes</strong> de publicar</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <i class="fa fa-check text-secundario mt-1 flex-shrink-0"></i>
+                                    <span>Combinar horários para postagens estratégicas</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <i class="fa fa-check text-secundario mt-1 flex-shrink-0"></i>
+                                    <span>Stories ao vivo durante a inauguração</span>
+                                </li>
+                                <li class="flex gap-2 items-start">
+                                    <i class="fa fa-check text-secundario mt-1 flex-shrink-0"></i>
+                                    <span>Repostar tudo no perfil da marca com créditos</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Parte 3: Cronograma até o Go-Live -->
-            <div class="bg-white p-6 rounded-xl sombra-leve">
+            <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
                 <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-primario flex items-center justify-center text-white font-bold">3</div>
-                    <h3 class="text-xl font-semibold text-primario">Cronograma de Produção até o Go-Live</h3>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primario flex items-center justify-center text-white font-bold number-badge pulse-ring">3</div>
+                    <div>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Cronograma até o Go-Live</h3>
+                        <p class="text-xs md:text-sm text-gray-500 flex items-center gap-1">
+                            <i class="fa fa-calendar text-secundario"></i>
+                            Planejamento Completo
+                        </p>
+                    </div>
                 </div>
 
-                <div class="relative pl-8 border-l-2 border-secundario space-y-6">
+                <div class="relative pl-6 md:pl-8 border-l-2 border-secundario space-y-5 md:space-y-6">
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">30 dias antes — Planejamento</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Definir perfil do Instagram/Facebook da Anny Ótica</li>
-                            <li>• Criar logo e identidade visual básica</li>
-                            <li>• Listar influenciadores por cidade e contatá-los</li>
-                            <li>• Rascunhar os 5 roteiros da Anny</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-calendar-plus-o text-secundario"></i>
+                            <p class="font-semibold text-neutro">30 dias antes — Planejamento</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Criar perfil Instagram/Facebook da Anny Ótica</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Finalizar logo e identidade visual</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Listar e contatar influenciadores por cidade</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Rascunhar os 5 roteiros da Anny</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">20 dias antes — Gravações Iniciais</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Gravar Vídeos 1 e 2 da Anny (apresentação + bastidores)</li>
-                            <li>• Editar e agendar postagem desses vídeos</li>
-                            <li>• Fechar parceria com influenciadores e enviar briefing</li>
-                            <li>• Preparar e enviar os brindes para cada influenciador</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-video-camera text-secundario"></i>
+                            <p class="font-semibold text-neutro">20 dias antes — Gravações Iniciais</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Gravar Vídeos 1 e 2 da Anny</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Editar e agendar postagens</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Fechar parcerias e enviar briefing</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Preparar e enviar brindes</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">15 dias antes — Conteúdo de Expectativa</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Publicar Vídeo 1 da Anny (apresentação)</li>
-                            <li>• Gravar Vídeo 3 da Anny (dicas de saúde ocular)</li>
-                            <li>• Influenciadores gravam e enviam para aprovação seu Vídeo 1 (expectativa)</li>
-                            <li>• Influenciadores publicam seus vídeos de expectativa</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-rocket text-secundario"></i>
+                            <p class="font-semibold text-neutro">15 dias antes — Expectativa</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Publicar Vídeo 1 da Anny</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Gravar Vídeo 3 (dicas de saúde ocular)</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Influenciadores gravam e enviam para aprovação</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Influenciadores publicam vídeos de expectativa</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">10 dias antes — Aquecimento</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Publicar Vídeo 2 da Anny (bastidores)</li>
-                            <li>• Publicar Vídeo 3 da Anny (dicas)</li>
-                            <li>• Repostar os melhores vídeos dos influenciadores</li>
-                            <li>• Criar artes de carrossel com depoimentos/dicas</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-fire text-secundario"></i>
+                            <p class="font-semibold text-neutro">10 dias antes — Aquecimento</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Publicar Vídeos 2 e 3 da Anny</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Repostar melhores vídeos dos influenciadores</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Criar artes de carrossel com dicas</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">7 dias antes — Convite Oficial</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Gravar e publicar Vídeo 4 da Anny (convite oficial com data)</li>
-                            <li>• Influenciadores reforçam o convite em stories</li>
-                            <li>• Iniciar contagem regressiva nos stories da marca</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-envelope text-secundario"></i>
+                            <p class="font-semibold text-neutro">7 dias antes — Convite Oficial</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Publicar Vídeo 4 (convite com data)</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Influenciadores reforçam em stories</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Iniciar contagem regressiva</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">1 dia antes — Véspera</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Publicar Vídeo 5 da Anny (agradecimento + expectativa)</li>
-                            <li>• Influenciadores postam stories lembrando da inauguração amanhã</li>
-                            <li>• Confirmar presença dos influenciadores no dia D</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-clock-o text-secundario"></i>
+                            <p class="font-semibold text-neutro">1 dia antes — Véspera</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Publicar Vídeo 5 (agradecimento)</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Influenciadores lembram em stories</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Confirmar presença de todos</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">Dia D — Go-Live!</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Anny faz stories ao vivo durante a manhã</li>
-                            <li>• Influenciadores gravam Vídeo 2 (cobertura) e publicam ao longo do dia</li>
-                            <li>• Influenciadores fazem stories ao vivo mostrando o movimento</li>
-                            <li>• Repostar tudo no perfil da marca, agradecendo cada participante</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-star text-secundario"></i>
+                            <p class="font-semibold text-neutro gradient-text">Dia D — Go-Live!</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Anny faz stories ao vivo pela manhã</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Influenciadores gravam e publicam cobertura</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Stories ao vivo mostrando o movimento</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Repostar tudo e agradecer cada participante</li>
                         </ul>
                     </div>
 
                     <div class="timeline-item relative">
-                        <p class="font-semibold text-neutro">1 dia depois — Pós-inauguração</p>
-                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
-                            <li>• Vídeo de agradecimento da Anny com fotos/vídeos do dia</li>
-                            <li>• Montar um reel com os melhores momentos de todos os vídeos</li>
-                            <li>• Continuar repostando conteúdos que ainda estão surgindo</li>
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fa fa-heart text-secundario"></i>
+                            <p class="font-semibold text-neutro">1 dia depois — Pós-inauguração</p>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Vídeo de agradecimento com momentos do dia</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Reel com os melhores momentos</li>
+                            <li class="flex items-start gap-2"><i class="fa fa-angle-right text-secundario mt-1"></i> Continuar repostando conteúdos</li>
                         </ul>
                     </div>
                 </div>
@@ -361,48 +633,115 @@
         </section>
 
         <!-- Seção 2: Cerimônia do Dia -->
-        <section class="mb-20 reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa fa-bullhorn text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Cerimônia e Decoração</h2>
+        <section class="mb-16 md:mb-20 reveal">
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primario/10 flex items-center justify-center icon-bounce">
+                    <i class="fa fa-bullhorn text-primario text-2xl md:text-3xl"></i>
+                </div>
+                <h2 class="text-[clamp(1.3rem,4vw,2rem)] font-bold">Cerimônia e Decoração</h2>
             </div>
 
-            <div class="bg-white p-6 rounded-xl sombra-leve mb-8">
-                <h3 class="text-xl font-semibold mb-4 text-primario">Momento Destaque: Balões e Confete</h3>
-                <p class="mb-4">No momento do corte da fita, todos soltam balões e confete simultaneamente — cria um momento bonito, fotogênico e que viraliza fácil!</p>
-                <ul class="space-y-2 pl-6">
-                    <li class="flex items-center gap-2"><i class="fa fa-star text-secundario"></i> Decoração econômica: arco de balões, faixa com nome da loja</li>
-                    <li class="flex items-center gap-2"><i class="fa fa-star text-secundario"></i> Pontos de disparo na entrada e fachada</li>
-                    <li class="flex items-center gap-2"><i class="fa fa-star text-secundario"></i> Contagem regressiva com todos presentes</li>
-                </ul>
+            <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-full bg-secundario/10 flex items-center justify-center animate-wiggle">
+                        <i class="fa fa-star text-secundario text-xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-semibold text-primario">Momento Destaque: Balões e Confete</h3>
+                </div>
+                <p class="mb-4 text-gray-600">No momento do corte da fita, todos soltam balões e confete simultaneamente — cria um momento bonito, fotogênico e que viraliza fácil!</p>
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <div class="p-4 bg-primario/5 rounded-lg text-center transicao hover:bg-primario/10">
+                        <i class="fa fa-paint-brush text-primario text-2xl mb-2 block"></i>
+                        <p class="text-sm font-medium">Decoração econômica</p>
+                        <p class="text-xs text-gray-500 mt-1">Arco de balões, faixa com nome</p>
+                    </div>
+                    <div class="p-4 bg-primario/5 rounded-lg text-center transicao hover:bg-primario/10">
+                        <i class="fa fa-map-signs text-primario text-2xl mb-2 block"></i>
+                        <p class="text-sm font-medium">Pontos estratégicos</p>
+                        <p class="text-xs text-gray-500 mt-1">Entrada e fachada da loja</p>
+                    </div>
+                    <div class="p-4 bg-primario/5 rounded-lg text-center transicao hover:bg-primario/10">
+                        <i class="fa fa-hourglass-half text-primario text-2xl mb-2 block"></i>
+                        <p class="text-sm font-medium">Contagem regressiva</p>
+                        <p class="text-xs text-gray-500 mt-1">Com todos presentes juntos</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Seção 3: Marketing e Design -->
-        <section class="mb-20 reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa fa-paint-brush text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Marketing e Identidade Visual</h2>
+        <section class="mb-16 md:mb-20 reveal">
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primario/10 flex items-center justify-center icon-bounce">
+                    <i class="fa fa-paint-brush text-primario text-2xl md:text-3xl"></i>
+                </div>
+                <h2 class="text-[clamp(1.3rem,4vw,2rem)] font-bold">Marketing e Identidade Visual</h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl sombra-leve transicao hover:scale-[1.02]">
-                    <h3 class="text-xl font-semibold mb-4 text-primario">Ações Gratuitas / Baixo Custo</h3>
-                    <ul class="space-y-2 pl-6">
-                        <li class="flex items-center gap-2"><i class="fa fa-check-circle text-secundario"></i> Cadastro no Google Meu Negócio</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check-circle text-secundario"></i> Hashtag exclusiva: #AnnyOticaChegou</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check-circle text-secundario"></i> Postagens com localização das cidades vizinhas</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-check-circle text-secundario"></i> Panfletagem em pontos estratégicos</li>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa fa-thumbs-up text-secundario text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Ações Gratuitas / Baixo Custo</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-google text-secundario text-sm"></i>
+                            </div>
+                            <span>Cadastro no Google Meu Negócio</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-hashtag text-secundario text-sm"></i>
+                            </div>
+                            <span>Hashtag exclusiva: #AnnyOticaChegou</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-map-marker text-secundario text-sm"></i>
+                            </div>
+                            <span>Postagens com localização das cidades</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-file-text-o text-secundario text-sm"></i>
+                            </div>
+                            <span>Panfletagem em pontos estratégicos</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl sombra-leve transicao hover:scale-[1.02]">
-                    <h3 class="text-xl font-semibold mb-4 text-primario">Promoções de Abertura</h3>
-                    <ul class="space-y-2 pl-6">
-                        <li class="flex items-center gap-2"><i class="fa fa-tag text-secundario"></i> Exame de vista gratuito</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-tag text-secundario"></i> Desconto especial só no dia</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-tag text-secundario"></i> 10% extra para quem vem de cidades vizinhas</li>
-                        <li class="flex items-center gap-2"><i class="fa fa-tag text-secundario"></i> Sorteio de brindes rápidos</li>
+                <div class="bg-white p-5 md:p-6 rounded-xl sombra-leve sombra-hover">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa fa-tags text-secundario text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-semibold text-primario">Promoções de Abertura</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-eye text-secundario text-sm"></i>
+                            </div>
+                            <span>Exame de vista gratuito</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-percent text-secundario text-sm"></i>
+                            </div>
+                            <span>Desconto especial só no dia</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-car text-secundario text-sm"></i>
+                            </div>
+                            <span>10% extra para cidades vizinhas</span>
+                        </li>
+                        <li class="flex items-center gap-3 list-item p-2 rounded-lg transicao hover:bg-gray-50">
+                            <div class="w-8 h-8 rounded-full bg-secundario/10 flex items-center justify-center flex-shrink-0 list-item-icon">
+                                <i class="fa fa-gift text-secundario text-sm"></i>
+                            </div>
+                            <span>Sorteio de brindes rápidos</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -410,46 +749,66 @@
 
         <!-- Seção 4: Cronograma Geral -->
         <section class="mb-12 reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fa fa-calendar text-primario text-3xl"></i>
-                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold">Cronograma Geral Passo a Passo</h2>
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primario/10 flex items-center justify-center icon-bounce">
+                    <i class="fa fa-calendar text-primario text-2xl md:text-3xl"></i>
+                </div>
+                <h2 class="text-[clamp(1.3rem,4vw,2rem)] font-bold">Cronograma Geral</h2>
             </div>
 
-            <div class="bg-white p-6 rounded-xl sombra-leve overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-primario text-white text-left">
-                            <th class="p-3 rounded-tl-lg">Tempo Antes</th>
-                            <th class="p-3 rounded-tr-lg">O Que Fazer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-100">
-                            <td class="p-3 font-medium">30 dias</td>
-                            <td class="p-3">Definir identidade visual e lista de influenciadores</td>
-                        </tr>
-                        <tr class="border-b border-gray-100 bg-gray-50">
-                            <td class="p-3 font-medium">20 dias</td>
-                            <td class="p-3">Contatar influenciadores e montar brindes</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <td class="p-3 font-medium">15 dias</td>
-                            <td class="p-3">Iniciar postagens e cadastrar no Google</td>
-                        </tr>
-                        <tr class="border-b border-gray-100 bg-gray-50">
-                            <td class="p-3 font-medium">7 dias</td>
-                            <td class="p-3">Confirmar presença e organizar decoração</td>
-                        </tr>
-                        <tr class="border-b border-gray-100">
-                            <td class="p-3 font-medium">1 dia</td>
-                            <td class="p-3">Montagem final e teste de tudo</td>
-                        </tr>
-                        <tr class="bg-gray-50">
-                            <td class="p-3 font-medium">Dia D</td>
-                            <td class="p-3">Contagem regressiva, balões, confete e atendimento!</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="bg-white rounded-xl sombra-leve sombra-hover overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[320px]">
+                        <thead>
+                            <tr class="bg-primario text-white text-left">
+                                <th class="p-3 md:p-4 text-sm md:text-base">
+                                    <i class="fa fa-clock-o mr-2"></i>Tempo
+                                </th>
+                                <th class="p-3 md:p-4 text-sm md:text-base">
+                                    <i class="fa fa-tasks mr-2"></i>O Que Fazer
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 transicao hover:bg-primario/5">
+                                <td class="p-3 md:p-4 font-medium text-sm">
+                                    <i class="fa fa-calendar-plus-o text-secundario mr-2"></i>30 dias
+                                </td>
+                                <td class="p-3 md:p-4 text-sm">Definir identidade visual e lista de influenciadores</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50 transicao hover:bg-primario/5">
+                                <td class="p-3 md:p-4 font-medium text-sm">
+                                    <i class="fa fa-users text-secundario mr-2"></i>20 dias
+                                </td>
+                                <td class="p-3 md:p-4 text-sm">Contatar influenciadores e montar brindes</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 transicao hover:bg-primario/5">
+                                <td class="p-3 md:p-4 font-medium text-sm">
+                                    <i class="fa fa-rocket text-secundario mr-2"></i>15 dias
+                                </td>
+                                <td class="p-3 md:p-4 text-sm">Iniciar postagens e cadastrar no Google</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 bg-gray-50 transicao hover:bg-primario/5">
+                                <td class="p-3 md:p-4 font-medium text-sm">
+                                    <i class="fa fa-check-circle text-secundario mr-2"></i>7 dias
+                                </td>
+                                <td class="p-3 md:p-4 text-sm">Confirmar presença e organizar decoração</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 transicao hover:bg-primario/5">
+                                <td class="p-3 md:p-4 font-medium text-sm">
+                                    <i class="fa fa-clock-o text-secundario mr-2"></i>1 dia
+                                </td>
+                                <td class="p-3 md:p-4 text-sm">Montagem final e teste de tudo</td>
+                            </tr>
+                            <tr class="bg-secundario/10 transicao hover:bg-secundario/15">
+                                <td class="p-3 md:p-4 font-bold text-sm">
+                                    <i class="fa fa-star text-secundario mr-2"></i>Dia D
+                                </td>
+                                <td class="p-3 md:p-4 text-sm font-medium">Contagem regressiva, balões, confete e atendimento!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
     </main>
@@ -457,9 +816,25 @@
     <!-- Rodapé -->
     <footer class="bg-neutro text-white py-8 text-center">
         <div class="container mx-auto px-4">
+            <div class="flex justify-center mb-4">
+                <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center animate-float">
+                    <i class="fa fa-eye text-white text-2xl"></i>
+                </div>
+            </div>
             <h3 class="text-xl font-semibold mb-2">Anny Ótica</h3>
-            <p>Chegando para cuidar da sua visão com carinho e qualidade!</p>
-            <p class="mt-4 text-sm opacity-80">Estratégia desenvolvida para fazer mais com menos</p>
+            <p class="text-white/80">Chegando para cuidar da sua visão com carinho e qualidade!</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transicao hover:bg-primario hover:scale-110">
+                    <i class="fa fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transicao hover:bg-primario hover:scale-110">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transicao hover:bg-primario hover:scale-110">
+                    <i class="fa fa-whatsapp"></i>
+                </a>
+            </div>
+            <p class="mt-6 text-sm opacity-70">Estratégia desenvolvida para fazer mais com menos</p>
         </div>
     </footer>
 
